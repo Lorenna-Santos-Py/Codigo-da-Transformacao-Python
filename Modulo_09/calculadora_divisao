@@ -1,0 +1,13 @@
+def calculadora_divisao(num1, num2):
+    try:
+        resultado = num1 / num2
+        return f"O resultado da divisão é: **{resultado}**"
+    except ZeroDivisionError:
+        return "**Erro: Não é possível dividir por zero!**"
+    except TypeError:
+        return "**Erro: Certifique-se de inserir números válidos.**"
+
+# Exemplos de uso:
+print(calculadora_divisao(10, 2))
+print(calculadora_divisao(10, 0))
+print(calculadora_divisao("a", 2))

@@ -1,0 +1,21 @@
+def sistema_login(usuario_correto, senha_correta, max_tentativas=3):
+    tentativas_restantes = max_tentativas
+    
+    while tentativas_restantes > 0:
+        print(f"\nTentativas restantes: {tentativas_restantes}")
+        user_input = input("Usuário: ")
+        pass_input = input("Senha: ")
+
+        if user_input == usuario_correto and pass_input == senha_correta:
+            print(f"\n**Login bem-sucedido! Bem-vindo, {usuario_correto}.**")
+            return True
+        else:
+            print("**Erro: Credenciais inválidas.**")
+            tentativas_restantes -= 1
+    
+    print(f"\n**Muitas tentativas falharam.** A conta foi bloqueada temporariamente.")
+    return False
+
+# Exemplo de uso:
+# Tente usar 'admin' e '12345' para sucesso. Qualquer outra coisa falhará após 3x.
+sistema_login("admin", "12345", max_tentativas=3)

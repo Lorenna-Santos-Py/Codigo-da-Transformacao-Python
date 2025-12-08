@@ -1,0 +1,31 @@
+# Definindo a exceção personalizada
+class SaldoInsuficienteError(Exception):
+    """Exceção levantada quando o saldo é insuficiente para o saque."""
+    def __init__(self, saldo_atual, valor_saque):
+        self.saldo_atual = saldo_atual
+        self.valor_saque = valor_saque
+        super().__init__(f"Tentativa de sacar R$ {valor_saque:.2f} com saldo de R$ {saldo_atual:.2f}.")
+
+class ContaBancaria:
+    def __init__(self, saldo_inicial=0):
+        self.saldo = saldo_inicial
+
+    def sacar(self, valor):
+        if valor > self.saldo:
+            raise SaldoInsuficienteError(self.saldo, valor)
+        self.saldo -= valor
+        return f"Saque de R$ {valor:.2f} realizado. Novo saldo: R$ **{self.saldo:.2f}**"
+
+    def depositar(self, valor):
+        self.saldo += valor
+        return f"Depósito de R$ {valor:.2f} realizado. Novo saldo: R$ **{self.saldo:.2f}**"
+
+# Exemplo de uso:
+minha_conta = ContaBancaria(100.00)
+print(minha_conta.depositar(50.00))
+
+try:
+    print(minha_conta.sacar(200.00)) # Isso deve levantar a exceção
+except SaldoInsuficienteError as e:
+    print(f"**Falha na operação de saque:** {e}")
+    print(f"Saldo atual: R$ **{e.saldo_atual:.2f}**")

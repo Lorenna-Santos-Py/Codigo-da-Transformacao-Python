@@ -1,0 +1,21 @@
+def validar_idade():
+    idade = 0
+    while True:
+        try:
+            entrada = input("Por favor, digite sua idade: ")
+            idade = int(entrada)
+            
+            if idade <= 0:
+                print("Erro: A idade deve ser um número positivo. Tente novamente.")
+                continue # Volta para o início do loop
+
+            # Se tudo estiver correto, sai do loop
+            print(f"Idade válida registrada: **{idade} anos**.")
+            break
+
+        except ValueError:
+            # Captura se a entrada não for um número inteiro
+            print(f"Erro: '{entrada}' não é um número válido. Tente novamente.")
+
+# Executa a função de validação
+validar_idade()
